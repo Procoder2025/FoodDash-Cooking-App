@@ -339,9 +339,6 @@ export default function Navbar() {
         @media (max-width: 480px) {
           .nav-cart-text { display: none; }
         }
-        @media (max-width: 640px) {
-          header > div:first-child { height: 56px !important; padding: 0 12px !important; }
-        }
       `}</style>
     </header>
   );

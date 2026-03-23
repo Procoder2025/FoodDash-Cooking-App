@@ -8,7 +8,7 @@ import { Search, ChefHat, Star, Clock, Shield, IndianRupee, Flame, ChevronLeft, 
 const slides = [
   {
     image: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=1400&h=700&fit=crop",
-    featured: "https://images.unsplash.com/photo-1567337710282-00832b415979?w=800&h=600&fit=crop",
+    videoId: "iFMmOFNz7Eg",
     title: "Freshly Homemade Meals",
     highlight: "Cooked with Love",
     sub: "in Your Neighbourhood",
@@ -16,7 +16,7 @@ const slides = [
   },
   {
     image: "https://images.unsplash.com/photo-1567337710282-00832b415979?w=1400&h=700&fit=crop",
-    featured: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&h=600&fit=crop",
+    videoId: "5gkNPSdJOOY",
     title: "Experience the Taste of",
     highlight: "Real Home Food",
     sub: "Wherever You Are",
@@ -24,7 +24,7 @@ const slides = [
   },
   {
     image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1400&h=700&fit=crop",
-    featured: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=600&fit=crop",
+    videoId: "1IszT_guI08",
     title: "Say Goodbye to Junk,",
     highlight: "Hello Healthy",
     sub: "Home-Style Dinners",
@@ -32,7 +32,7 @@ const slides = [
   },
   {
     image: "https://images.unsplash.com/photo-1630383249896-424e482df921?w=1400&h=700&fit=crop",
-    featured: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&h=600&fit=crop",
+    videoId: "GzhMsK87EB0",
     title: "South Indian Specials",
     highlight: "From Amma's Kitchen",
     sub: "to Your Doorstep",
@@ -40,7 +40,7 @@ const slides = [
   },
   {
     image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=1400&h=700&fit=crop",
-    featured: "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=800&h=600&fit=crop",
+    videoId: "K4pMSfjOaq0",
     title: "Royal Biryani &",
     highlight: "Mughlai Flavours",
     sub: "Made with Secret Recipes",
@@ -54,17 +54,13 @@ export default function HeroCarousel() {
   const next = useCallback(() => setCurrent((p) => (p + 1) % slides.length), []);
   const prev = useCallback(() => setCurrent((p) => (p - 1 + slides.length) % slides.length), []);
 
-  // Auto-advance every 5 seconds
-  useEffect(() => {
-    const timer = setInterval(next, 5000);
-    return () => clearInterval(timer);
-  }, [next]);
+  // No auto-advance — user controls video navigation manually
 
   const s = slides[current];
 
   return (
     <div style={{ width: "100%", position: "relative" }}>
-      <div className="hero-wrapper">
+      <div style={{ width: "100%", position: "relative", overflow: "hidden", minHeight: 520 }}>
 
         {/* Blurred Background Image Slideshow */}
         <AnimatePresence mode="wait">
@@ -94,7 +90,7 @@ export default function HeroCarousel() {
         <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.35)", zIndex: 1 }} />
 
         {/* Content */}
-        <div className="hero-content">
+        <div style={{ position: "relative", zIndex: 2, maxWidth: 1200, margin: "0 auto", padding: "40px 20px" }}>
           <div className="hero-layout">
 
             {/* Left - Text */}
@@ -102,14 +98,19 @@ export default function HeroCarousel() {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="hero-badge"
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: 8,
+                  background: "rgba(255,255,255,0.1)", backdropFilter: "blur(12px)",
+                  color: "#fff", padding: "7px 16px", borderRadius: 50, fontSize: 12, fontWeight: 600, marginBottom: 18,
+                  border: "1px solid rgba(255,255,255,0.15)",
+                }}
               >
                 <motion.span
                   animate={{ scale: [1, 1.4, 1], opacity: [1, 0.5, 1] }}
                   transition={{ repeat: Infinity, duration: 1.5 }}
-                  style={{ width: 7, height: 7, background: "#4ade80", borderRadius: "50%", display: "inline-block", flexShrink: 0 }}
+                  style={{ width: 8, height: 8, background: "#4ade80", borderRadius: "50%", display: "inline-block" }}
                 />
-                <ChefHat size={12} /> 500+ Home Chefs Active
+                <ChefHat size={13} /> 500+ Home Chefs Active
               </motion.div>
 
               <AnimatePresence mode="wait">
@@ -138,7 +139,7 @@ export default function HeroCarousel() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="hero-buttons"
+                style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 24 }}
               >
                 <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.95 }} style={{ flex: "1 1 auto" }}>
                   <Link href="/browse" className="hero-btn-primary">
@@ -153,51 +154,45 @@ export default function HeroCarousel() {
               </motion.div>
 
               {/* Mini stats */}
-              <div className="hero-stats">
+              <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
                 {[
                   { val: "500+", label: "Chefs" },
                   { val: "50K+", label: "Customers" },
                   { val: "4.8", label: "Rating" },
                 ].map((stat, i) => (
                   <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 + i * 0.1 }}>
-                    <div className="hero-stat-val">{stat.val}</div>
-                    <div className="hero-stat-label">{stat.label}</div>
+                    <div style={{ fontSize: 20, fontWeight: 900, color: "#4ade80" }}>{stat.val}</div>
+                    <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", fontWeight: 500 }}>{stat.label}</div>
                   </motion.div>
                 ))}
               </div>
             </div>
 
-            {/* Right - Featured Food Image */}
+            {/* Right - YouTube Video */}
             <div className="hero-image">
-              <AnimatePresence mode="wait">
-                <motion.div
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                style={{
+                  borderRadius: 18, overflow: "hidden",
+                  boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+                  border: "2px solid rgba(255,255,255,0.12)",
+                  aspectRatio: "16/9",
+                  background: "#000",
+                  position: "relative",
+                }}
+              >
+                <iframe
                   key={current}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.5 }}
-                  className="hero-image-card"
-                >
-                  <img
-                    src={s.featured}
-                    alt={s.title}
-                    style={{
-                      width: "100%", height: "100%", objectFit: "cover",
-                      display: "block",
-                    }}
-                  />
-                  {/* Gradient overlay on image */}
-                  <div style={{
-                    position: "absolute", bottom: 0, left: 0, right: 0,
-                    height: "40%",
-                    background: "linear-gradient(transparent, rgba(0,0,0,0.6))",
-                    borderRadius: "0 0 16px 16px",
-                  }} />
-                </motion.div>
-              </AnimatePresence>
+                  src={`https://www.youtube.com/embed/${s.videoId}?rel=0&modestbranding=1&playsinline=1`}
+                  allow="autoplay; encrypted-media; fullscreen"
+                  allowFullScreen
+                  style={{ width: "100%", height: "100%", border: "none", position: "absolute", top: 0, left: 0 }}
+                />
+              </motion.div>
 
               {/* Navigation */}
-              <div className="hero-nav">
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 8, marginTop: 14 }}>
                 <button onClick={prev} className="hero-nav-btn"
                   onMouseEnter={(e) => { e.currentTarget.style.background = "#16a34a"; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.12)"; }}
@@ -205,8 +200,8 @@ export default function HeroCarousel() {
                   <ChevronLeft size={16} />
                 </button>
                 {slides.map((_, i) => (
-                  <button key={i} onClick={() => setCurrent(i)} className="hero-dot" style={{
-                    width: current === i ? 20 : 7, height: 7, borderRadius: 50, border: "none", cursor: "pointer",
+                  <button key={i} onClick={() => setCurrent(i)} style={{
+                    width: current === i ? 28 : 9, height: 9, borderRadius: 50, border: "none", cursor: "pointer",
                     background: current === i ? "#4ade80" : "rgba(255,255,255,0.3)",
                     transition: "all 0.3s",
                   }} />
@@ -224,14 +219,14 @@ export default function HeroCarousel() {
       </div>
 
       {/* Trust Bar */}
-      <div className="trust-bar-wrapper">
+      <div style={{ width: "100%", background: "#f9fafb", borderBottom: "1px solid #e5e7eb", padding: "14px 16px" }}>
         <div className="trust-bar">
           {[
-            { icon: <Star size={16} color="#f59e0b" fill="#f59e0b" />, label: "4.8 Rating", sub: "50K+ reviews" },
-            { icon: <Clock size={16} color="#3b82f6" />, label: "30 Min Delivery", sub: "Fresh & hot" },
-            { icon: <Shield size={16} color="#16a34a" />, label: "Hygiene Certified", sub: "All verified" },
-            { icon: <IndianRupee size={16} color="#f97316" />, label: "Best Prices", sub: "No middleman" },
-            { icon: <Flame size={16} color="#8b5cf6" />, label: "500+ Chefs", sub: "Near you" },
+            { icon: <Star size={18} color="#f59e0b" fill="#f59e0b" />, label: "4.8 Rating", sub: "50K+ reviews" },
+            { icon: <Clock size={18} color="#3b82f6" />, label: "30 Min Delivery", sub: "Fresh & hot" },
+            { icon: <Shield size={18} color="#16a34a" />, label: "Hygiene Certified", sub: "All verified" },
+            { icon: <IndianRupee size={18} color="#f97316" />, label: "Best Prices", sub: "No middleman" },
+            { icon: <Flame size={18} color="#8b5cf6" />, label: "500+ Chefs", sub: "Near you" },
           ].map((b, i) => (
             <motion.div
               key={i}
@@ -239,14 +234,15 @@ export default function HeroCarousel() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="trust-item"
+              whileHover={{ y: -2, scale: 1.05 }}
+              style={{ display: "flex", alignItems: "center", gap: 8, cursor: "default" }}
             >
-              <div style={{ flexShrink: 0 }}>
+              <motion.div whileHover={{ rotate: [0, -10, 10, 0] }} transition={{ duration: 0.4 }}>
                 {b.icon}
-              </div>
+              </motion.div>
               <div>
-                <div className="trust-label">{b.label}</div>
-                <div className="trust-sub">{b.sub}</div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: "#111" }}>{b.label}</div>
+                <div style={{ fontSize: 10, color: "#9ca3af" }}>{b.sub}</div>
               </div>
             </motion.div>
           ))}
@@ -254,120 +250,57 @@ export default function HeroCarousel() {
       </div>
 
       <style>{`
-        .hero-wrapper {
-          width: 100%; position: relative; overflow: hidden; min-height: 480px;
-        }
-        .hero-content {
-          position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 36px 20px;
-        }
         .hero-layout {
           display: flex; gap: 36px; align-items: center; flex-wrap: wrap;
         }
         .hero-text { flex: 1 1 320px; min-width: 0; }
-        .hero-image { flex: 1 1 400px; min-width: 0; }
-        .hero-badge {
-          display: inline-flex; align-items: center; gap: 6;
-          background: rgba(255,255,255,0.1); backdrop-filter: blur(12px);
-          color: #fff; padding: 6px 14px; border-radius: 50px; font-size: 11px; font-weight: 600; margin-bottom: 16px;
-          border: 1px solid rgba(255,255,255,0.15);
-        }
+        .hero-image { flex: 1 1 440px; min-width: 0; }
         .hero-title {
-          font-size: clamp(24px, 4vw, 44px); font-weight: 900;
-          color: #fff; line-height: 1.15; margin-bottom: 10px;
+          font-size: clamp(26px, 4vw, 44px); font-weight: 900;
+          color: #fff; line-height: 1.12; margin-bottom: 12px;
         }
-        .hero-sub { font-size: clamp(16px, 3vw, 32px); }
+        .hero-sub { font-size: clamp(17px, 3vw, 32px); }
         .hero-desc {
-          color: rgba(255,255,255,0.6); font-size: 14px;
-          line-height: 1.6; margin-bottom: 20px; max-width: 420px;
-        }
-        .hero-buttons {
-          display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;
+          color: rgba(255,255,255,0.6); font-size: 15px;
+          line-height: 1.6; margin-bottom: 22px; max-width: 420px;
         }
         .hero-btn-primary {
           display: inline-flex; align-items: center; gap: 8px; width: 100%;
           justify-content: center; background: #16a34a; color: #fff;
-          padding: 12px 22px; border-radius: 12px; font-size: 14px; font-weight: 700;
+          padding: 13px 24px; border-radius: 12px; font-size: 15px; font-weight: 700;
           box-shadow: 0 4px 20px rgba(22,163,74,0.4);
         }
         .hero-btn-secondary {
           display: inline-flex; align-items: center; gap: 8px; width: 100%;
           justify-content: center; background: rgba(255,255,255,0.1); color: #fff;
-          padding: 12px 22px; border-radius: 12px; font-size: 14px; font-weight: 600;
+          padding: 13px 24px; border-radius: 12px; font-size: 15px; font-weight: 600;
           border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(4px);
         }
-        .hero-stats {
-          display: flex; gap: 20px; flex-wrap: wrap;
-        }
-        .hero-stat-val { font-size: 18px; font-weight: 900; color: #4ade80; }
-        .hero-stat-label { font-size: 10px; color: rgba(255,255,255,0.5); font-weight: 500; }
-        .hero-image-card {
-          border-radius: 16px; overflow: hidden;
-          box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-          border: 2px solid rgba(255,255,255,0.12);
-          aspect-ratio: 4/3;
-          background: #000;
-          position: relative;
-        }
-        .hero-nav {
-          display: flex; justify-content: center; align-items: center; gap: 6px; margin-top: 12px;
-        }
         .hero-nav-btn {
-          width: 32px; height: 32px; border-radius: 50%;
+          width: 34px; height: 34px; border-radius: 50%;
           background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.15);
           color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
-          transition: background 0.2s; flex-shrink: 0;
-        }
-        .hero-dot {
-          flex-shrink: 0;
-        }
-        .trust-bar-wrapper {
-          width: 100%; background: #f9fafb; border-bottom: 1px solid #e5e7eb; padding: 12px 16px;
+          transition: background 0.2s;
         }
         .trust-bar {
           max-width: 1200px; margin: 0 auto;
-          display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 16px;
+          display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px 20px;
         }
-        .trust-item {
-          display: flex; align-items: center; gap: 6px; cursor: default; flex-shrink: 0;
-        }
-        .trust-label { font-size: 11px; font-weight: 700; color: #111; white-space: nowrap; }
-        .trust-sub { font-size: 9px; color: #9ca3af; white-space: nowrap; }
 
-        /* Mobile <= 640px */
         @media (max-width: 640px) {
-          .hero-wrapper { min-height: auto; }
-          .hero-content { padding: 24px 16px 20px; }
-          .hero-layout { flex-direction: column; gap: 18px; }
+          .hero-layout { flex-direction: column; gap: 24px; }
           .hero-text { flex-basis: 100%; text-align: center; }
           .hero-image { flex-basis: 100%; }
-          .hero-badge { font-size: 10px; padding: 5px 10px; margin-bottom: 12px; }
-          .hero-title { font-size: 22px; margin-bottom: 8px; line-height: 1.2; }
-          .hero-sub { font-size: 15px; }
-          .hero-desc { margin-left: auto; margin-right: auto; font-size: 12px; margin-bottom: 14px; line-height: 1.5; }
-          .hero-buttons { gap: 8px; margin-bottom: 16px; }
-          .hero-btn-primary, .hero-btn-secondary { padding: 10px 16px; font-size: 13px; border-radius: 10px; }
-          .hero-stats { justify-content: center; gap: 24px; }
-          .hero-stat-val { font-size: 16px; }
-          .hero-stat-label { font-size: 9px; }
-          .hero-image-card { aspect-ratio: 16/10; border-radius: 12px; border-width: 1px; }
-          .hero-nav { gap: 4px; margin-top: 10px; }
-          .hero-nav-btn { width: 28px; height: 28px; }
-          .hero-dot { height: 6px !important; }
-          .trust-bar-wrapper { padding: 10px 12px; }
-          .trust-bar {
-            gap: 8px 14px; justify-content: center; flex-wrap: wrap;
-          }
-          .trust-item { gap: 4px; }
-          .trust-label { font-size: 10px; }
-          .trust-sub { font-size: 8px; }
+          .hero-desc { margin-left: auto; margin-right: auto; font-size: 13px; }
+          .hero-btn-primary, .hero-btn-secondary { padding: 12px 20px; font-size: 14px; }
+          .trust-bar { gap: 12px 20px; justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; -ms-overflow-style: none; scrollbar-width: none; }
+          .trust-bar::-webkit-scrollbar { display: none; }
         }
 
-        /* Tablet 641-900px */
         @media (min-width: 641px) and (max-width: 900px) {
           .hero-layout { gap: 24px; }
           .hero-text { flex-basis: 100%; }
           .hero-image { flex-basis: 100%; }
-          .hero-content { padding: 30px 20px; }
         }
       `}</style>
     </div>
