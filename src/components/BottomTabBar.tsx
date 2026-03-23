@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { Home, Search, BookOpen, ShoppingBasket, Heart, User, CalendarCheck, PartyPopper, Info, Phone } from "lucide-react";
+import { Home, Search, BookOpen, ShoppingBasket, Heart, User } from "lucide-react";
 
 export default function BottomTabBar() {
   const pathname = usePathname();
@@ -14,10 +14,6 @@ export default function BottomTabBar() {
     { href: "/browse", label: "Browse", icon: Search },
     { href: "/recipes", label: "Recipes", icon: BookOpen },
     { href: "/grocery", label: "Grocery", icon: ShoppingBasket },
-    { href: "/subscription", label: "Subscribe", icon: CalendarCheck },
-    { href: "/party-orders", label: "Party", icon: PartyPopper },
-    { href: "/about", label: "About", icon: Info },
-    { href: "/contact", label: "Contact", icon: Phone },
     ...(isLoggedIn
       ? [{ href: "/favorites", label: "Favorites", icon: Heart }]
       : [{ href: "/auth/login?role=customer", label: "Login", icon: User }]),
@@ -31,9 +27,9 @@ export default function BottomTabBar() {
           return (
             <Link key={item.href} href={item.href} style={{
               display: "flex", flexDirection: "column", alignItems: "center", gap: 1,
-              fontSize: 9, fontWeight: active ? 700 : 500, padding: "4px 6px",
+              fontSize: 10, fontWeight: active ? 700 : 500, padding: "4px 8px",
               color: active ? "#16a34a" : "#6b7280",
-              textDecoration: "none", flexShrink: 0, minWidth: 48,
+              textDecoration: "none",
             }}>
               <item.icon size={18} strokeWidth={active ? 2.5 : 1.5} />
               {item.label}
@@ -58,10 +54,8 @@ export default function BottomTabBar() {
             border-top: 1px solid #e5e7eb !important;
             box-shadow: 0 -2px 10px rgba(0,0,0,0.08) !important;
             padding: 4px 0 env(safe-area-inset-bottom, 2px) !important;
-            overflow-x: auto !important;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
+            justify-content: space-around !important;
+            align-items: center !important;
           }
         }
       `}</style>
