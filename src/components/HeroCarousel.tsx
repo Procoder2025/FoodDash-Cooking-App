@@ -174,26 +174,30 @@ export default function HeroCarousel() {
 
             {/* Right - YouTube Video */}
             <div className="hero-image">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                style={{
-                  borderRadius: 18, overflow: "hidden",
-                  boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
-                  border: "2px solid rgba(255,255,255,0.12)",
-                  aspectRatio: "16/9",
-                  background: "#000",
-                  position: "relative",
-                }}
-              >
-                <iframe
-                  key={current}
-                  src={`https://www.youtube.com/embed/${s.videoId}?rel=0&modestbranding=1&playsinline=1`}
-                  allow="autoplay; encrypted-media; fullscreen"
-                  allowFullScreen
-                  style={{ width: "100%", height: "100%", border: "none", position: "absolute", top: 0, left: 0 }}
-                />
-              </motion.div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={`video-${current}`}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.5 }}
+                  style={{
+                    borderRadius: 18, overflow: "hidden",
+                    boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+                    border: "2px solid rgba(255,255,255,0.12)",
+                    aspectRatio: "16/9",
+                    background: "#000",
+                    position: "relative",
+                  }}
+                >
+                  <iframe
+                    src={`https://www.youtube.com/embed/${s.videoId}?rel=0&modestbranding=1&playsinline=1`}
+                    allow="autoplay; encrypted-media; fullscreen"
+                    allowFullScreen
+                    style={{ width: "100%", height: "100%", border: "none", position: "absolute", top: 0, left: 0 }}
+                  />
+                </motion.div>
+              </AnimatePresence>
 
               {/* Navigation */}
               <div className="hero-nav" style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 8, marginTop: 14 }}>
