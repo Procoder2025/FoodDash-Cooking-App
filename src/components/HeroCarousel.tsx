@@ -54,7 +54,11 @@ export default function HeroCarousel() {
   const next = useCallback(() => setCurrent((p) => (p + 1) % slides.length), []);
   const prev = useCallback(() => setCurrent((p) => (p - 1 + slides.length) % slides.length), []);
 
-  // No auto-advance — user controls video navigation manually
+  // Auto-advance every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(next, 5000);
+    return () => clearInterval(timer);
+  }, [next]);
 
   const s = slides[current];
 
