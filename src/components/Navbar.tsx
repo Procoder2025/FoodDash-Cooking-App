@@ -7,7 +7,7 @@ import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag, Menu, X, LogOut, User, ChefHat, Home, UtensilsCrossed, Search, ClipboardList, Info, Phone, Package, TrendingUp, CalendarCheck, PartyPopper, Heart, Settings, BookOpen, ShoppingBasket, Bike, IndianRupee, Navigation } from "lucide-react";
+import { ShoppingBag, Menu, X, LogOut, User, UserPlus, ChefHat, Home, UtensilsCrossed, Search, ClipboardList, Info, Phone, Package, TrendingUp, CalendarCheck, PartyPopper, Heart, Settings, BookOpen, ShoppingBasket, Bike, IndianRupee, Navigation } from "lucide-react";
 
 export default function Navbar() {
   const { totalItems } = useCart();
@@ -323,15 +323,30 @@ export default function Navbar() {
       {/* Mobile Dropdown (hamburger) — kept for login/signup role selection */}
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            style={{
-              position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
-              background: "#fff", zIndex: 9998,
-              overflowY: "auto", paddingTop: 60,
-            }}>
-            <div style={{ padding: "8px 16px 70px" }}>
-              {/* All nav links in compact grid */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
+          <>
+            {/* Dark overlay */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => setOpen(false)}
+              style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.5)", zIndex: 9997 }} />
+            {/* Side drawer */}
+            <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }}
+              transition={{ type: "tween", duration: 0.3 }}
+              style={{
+                position: "fixed", top: 0, right: 0, bottom: 0, width: "75%", maxWidth: 320,
+                background: "linear-gradient(180deg, #0f3443, #163a4a, #1a4050)",
+                zIndex: 9998, overflowY: "auto", padding: "60px 0 80px",
+                boxShadow: "-4px 0 30px rgba(0,0,0,0.3)",
+              }}>
+
+              {/* Close button */}
+              <button onClick={() => setOpen(false)} style={{
+                position: "absolute", top: 16, right: 16, width: 36, height: 36,
+                background: "rgba(255,255,255,0.1)", border: "none", borderRadius: 8,
+                color: "#fff", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+              }}><X size={18} /></button>
+
+              {/* Nav links */}
+              <div style={{ padding: "0 24px" }}>
                 {[
                   { href: "/", label: "Home", icon: Home },
                   { href: "/browse", label: "Browse Food", icon: Search },
@@ -344,50 +359,33 @@ export default function Navbar() {
                   { href: "/contact", label: "Contact", icon: Phone },
                 ].map((link) => (
                   <Link key={link.href} href={link.href} onClick={() => setOpen(false)} style={{
-                    display: "flex", alignItems: "center", gap: 8, padding: "10px 12px",
-                    borderRadius: 10, fontSize: 13, fontWeight: 600,
-                    color: pathname === link.href ? "#16a34a" : "#374151",
-                    background: pathname === link.href ? "#f0fdf4" : "#f9fafb",
-                    border: pathname === link.href ? "1px solid #16a34a" : "1px solid #e5e7eb",
+                    display: "flex", alignItems: "center", gap: 12, padding: "14px 0",
+                    fontSize: 16, fontWeight: pathname === link.href ? 700 : 400,
+                    color: pathname === link.href ? "#4ade80" : "rgba(255,255,255,0.85)",
+                    borderBottom: "1px solid rgba(255,255,255,0.08)",
+                    letterSpacing: 0.3,
                   }}>
-                    <link.icon size={16} /> {link.label}
+                    <link.icon size={18} strokeWidth={pathname === link.href ? 2.5 : 1.5} /> {link.label}
                   </Link>
                 ))}
               </div>
 
               {/* Login/Signup for guests */}
               {!isLoggedIn && (
-                <div style={{ marginTop: 12, borderTop: "1px solid #e5e7eb", paddingTop: 12 }}>
-                  <p style={{ fontSize: 11, fontWeight: 700, color: "#9ca3af", marginBottom: 8, textTransform: "uppercase" }}>Login as</p>
-                  <div style={{ display: "flex", gap: 6, marginBottom: 12 }}>
-                    {[
-                      { role: "customer", label: "Customer", icon: ShoppingBag, color: "#3b82f6" },
-                      { role: "cooker", label: "Home Chef", icon: ChefHat, color: "#16a34a" },
-                      { role: "delivery", label: "Delivery Partner", icon: Bike, color: "#f59e0b" },
-                    ].map((item) => (
-                      <Link key={item.role} href={`/auth/login?role=${item.role}`} onClick={() => setOpen(false)}
-                        style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "10px 8px", borderRadius: 10, border: "1px solid #e5e7eb", fontSize: 12, fontWeight: 600, color: "#374151" }}>
-                        <item.icon size={16} color={item.color} /> {item.label}
-                      </Link>
-                    ))}
-                  </div>
-                  <p style={{ fontSize: 11, fontWeight: 700, color: "#9ca3af", marginBottom: 8, textTransform: "uppercase" }}>Sign Up as</p>
-                  <div style={{ display: "flex", gap: 6 }}>
-                    {[
-                      { role: "customer", label: "Customer", icon: ShoppingBag, color: "#fff" },
-                      { role: "cooker", label: "Home Chef", icon: ChefHat, color: "#fff" },
-                      { role: "delivery", label: "Delivery Partner", icon: Bike, color: "#fff" },
-                    ].map((item) => (
-                      <Link key={item.role} href={`/auth/signup?role=${item.role}`} onClick={() => setOpen(false)}
-                        style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "10px 8px", borderRadius: 10, background: "#16a34a", color: "#fff", fontSize: 12, fontWeight: 600 }}>
-                        <item.icon size={16} color="#fff" /> {item.label}
-                      </Link>
-                    ))}
-                  </div>
+                <div style={{ padding: "20px 24px 0" }}>
+                  <p style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.4)", marginBottom: 10, textTransform: "uppercase", letterSpacing: 1 }}>Account</p>
+                  <Link href="/auth/login?role=customer" onClick={() => setOpen(false)}
+                    style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 16px", borderRadius: 10, border: "1px solid rgba(255,255,255,0.15)", color: "#fff", fontSize: 14, fontWeight: 600, marginBottom: 8 }}>
+                    <User size={16} /> Login
+                  </Link>
+                  <Link href="/auth/signup?role=customer" onClick={() => setOpen(false)}
+                    style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 16px", borderRadius: 10, background: "#16a34a", color: "#fff", fontSize: 14, fontWeight: 600 }}>
+                    <UserPlus size={16} /> Sign Up
+                  </Link>
                 </div>
               )}
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
 
