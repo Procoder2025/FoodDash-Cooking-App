@@ -325,7 +325,7 @@ export default function Navbar() {
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}
             className="show-mobile" style={{ display: "none", background: "#fff", borderTop: "1px solid #e5e7eb", overflow: "hidden" }}>
             <div style={{ padding: "12px 20px 16px" }}>
-              {!isLoggedIn ? (
+              {!isLoggedIn && (
                 <div>
                   <p style={{ fontSize: 12, fontWeight: 700, color: "#9ca3af", marginBottom: 8, textTransform: "uppercase" }}>Login as</p>
                   <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 14 }}>
