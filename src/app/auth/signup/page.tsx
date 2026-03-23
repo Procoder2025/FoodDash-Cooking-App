@@ -278,6 +278,18 @@ function SignupContent() {
             }}>
               {loading ? "⏳ Creating Account..." : <><UserPlus size={18} /> Create {role === "cooker" ? "Chef" : role === "delivery" ? "Rider" : "Customer"} Account</>}
             </motion.button>
+
+            <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} type="button" onClick={() => {
+              setForm({ name: "", email: "", phone: "", password: "", confirmPassword: "", kitchenName: "", speciality: "", address: "", vehicleType: "Bike", vehicleNumber: "" });
+              setErrors({});
+              setGlobalError("");
+            }} style={{
+              width: "100%", padding: "14px", borderRadius: 12, background: "#f3f4f6", color: "#374151",
+              border: "1px solid #e5e7eb", fontSize: 15, fontWeight: 700, cursor: "pointer", marginTop: 10,
+              display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+            }}>
+              Clear All
+            </motion.button>
           </form>
 
           <p style={{ textAlign: "center", marginTop: 18, fontSize: 14, color: "#6b7280" }}>
