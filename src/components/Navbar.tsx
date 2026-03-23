@@ -293,24 +293,38 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
+      {/* Mobile Horizontal Scrollable Nav */}
+      <div className="mobile-nav-bar" style={{ display: "none", overflowX: "auto", background: "#fff", borderTop: "1px solid #f3f4f6", padding: "6px 10px", gap: 4, WebkitOverflowScrolling: "touch", msOverflowStyle: "none", scrollbarWidth: "none" }}>
+        {navLinks.map((item) => (
+          <Link key={item.href} href={item.href} style={{
+            display: "flex", alignItems: "center", gap: 4, padding: "6px 12px", whiteSpace: "nowrap",
+            borderRadius: 50, fontSize: 11, fontWeight: 600,
+            color: pathname === item.href ? "#fff" : "#4b5563",
+            background: pathname === item.href ? "#16a34a" : "#f3f4f6",
+          }}>
+            <item.icon size={13} /> {item.label}
+          </Link>
+        ))}
+        {!isLoggedIn && (
+          <>
+            <Link href="/auth/login?role=customer" style={{ display: "flex", alignItems: "center", gap: 4, padding: "6px 12px", whiteSpace: "nowrap", borderRadius: 50, fontSize: 11, fontWeight: 700, color: "#16a34a", background: "#f0fdf4", border: "1px solid #16a34a" }}>
+              Login
+            </Link>
+            <Link href="/auth/signup?role=customer" style={{ display: "flex", alignItems: "center", gap: 4, padding: "6px 12px", whiteSpace: "nowrap", borderRadius: 50, fontSize: 11, fontWeight: 700, color: "#fff", background: "#16a34a" }}>
+              Sign Up
+            </Link>
+          </>
+        )}
+      </div>
+
+      {/* Mobile Dropdown (hamburger) — kept for login/signup role selection */}
       <AnimatePresence>
         {open && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}
             className="show-mobile" style={{ display: "none", background: "#fff", borderTop: "1px solid #e5e7eb", overflow: "hidden" }}>
             <div style={{ padding: "12px 20px 16px" }}>
-              {navLinks.map((item) => (
-                <Link key={item.href} href={item.href} onClick={() => setOpen(false)} style={{
-                  display: "flex", alignItems: "center", gap: 10, padding: "12px 16px",
-                  borderRadius: 10, fontSize: 14, fontWeight: 600,
-                  color: pathname === item.href ? "#16a34a" : "#374151",
-                  background: pathname === item.href ? "#f0fdf4" : "transparent",
-                  marginBottom: 2,
-                }}>
-                  <item.icon size={18} /> {item.label}
-                </Link>
-              ))}
-              {!isLoggedIn && (
-                <div style={{ marginTop: 12 }}>
+              {!isLoggedIn ? (
+                <div>
                   <p style={{ fontSize: 12, fontWeight: 700, color: "#9ca3af", marginBottom: 8, textTransform: "uppercase" }}>Login as</p>
                   <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 14 }}>
                     {[
@@ -345,15 +359,21 @@ export default function Navbar() {
       </AnimatePresence>
 
       <style>{`
+        .mobile-nav-bar::-webkit-scrollbar { display: none; }
         @media (max-width: 1024px) {
           .hidden-mobile { display: none !important; }
           .show-mobile { display: flex !important; }
+          .mobile-nav-bar { display: flex !important; }
         }
-        @media (min-width: 1025px) { .show-mobile { display: none !important; } }
+        @media (min-width: 1025px) {
+          .show-mobile { display: none !important; }
+          .mobile-nav-bar { display: none !important; }
+        }
         @media (max-width: 640px) {
           .nav-cart-text { display: none; }
           header { height: 52px !important; }
           header > div { height: 52px !important; padding: 0 12px !important; }
+          .mobile-nav-bar { padding: 4px 8px !important; }
         }
       `}</style>
     </header>
