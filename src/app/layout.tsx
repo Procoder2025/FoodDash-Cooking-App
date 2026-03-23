@@ -9,6 +9,7 @@ import { RecipeProvider } from "@/context/RecipeContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import BottomTabBar from "@/components/BottomTabBar";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <main style={{ flex: 1 }}>{children}</main>
                   <Footer />
                   <WhatsAppButton />
+                  <BottomTabBar />
                 </CartProvider>
               </RecipeProvider>
             </FavoritesProvider>

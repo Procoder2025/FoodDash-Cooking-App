@@ -292,8 +292,8 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Bottom Tab Bar — fixed at bottom like real apps */}
-      <nav className="mobile-bottom-bar">
+      {/* Bottom tab bar moved to BottomTabBar component in layout */}
+      <nav className="mobile-bottom-bar" style={{ display: "none" }}>
         {[
           { href: "/", label: "Home", icon: Home },
           { href: "/browse", label: "Browse", icon: Search },
@@ -378,15 +378,8 @@ export default function Navbar() {
         @media (max-width: 1024px) {
           .hidden-mobile { display: none !important; }
           .show-mobile { display: flex !important; }
-          .mobile-bottom-bar {
-            display: flex !important;
-            position: fixed !important; bottom: 0 !important; left: 0 !important; right: 0 !important;
-            z-index: 200; background: #fff; border-top: 1px solid #e5e7eb;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
-            padding: 6px 0 env(safe-area-inset-bottom, 4px);
-            justify-content: space-around; align-items: center;
-          }
-          body > main, body { padding-bottom: 60px !important; }
+          .mobile-bottom-bar { display: none !important; }
+          body { padding-bottom: 60px !important; }
         }
         @media (min-width: 1025px) {
           .show-mobile { display: none !important; }
