@@ -342,7 +342,7 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}
-            className="show-mobile" style={{ display: "none", background: "#fff", borderTop: "1px solid #e5e7eb", overflow: "hidden" }}>
+            style={{ background: "#fff", borderTop: "1px solid #e5e7eb", overflow: "hidden" }}>
             <div style={{ padding: "12px 16px 16px" }}>
               {/* All nav links */}
               {navLinks.flatMap((item: any) => item.children ? item.children : [item]).map((link: any) => (
