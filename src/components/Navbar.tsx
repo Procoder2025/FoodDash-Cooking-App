@@ -327,30 +327,33 @@ export default function Navbar() {
             style={{
               position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
               background: "#fff", zIndex: 9998,
-              overflowY: "auto", paddingTop: 70,
+              overflowY: "auto", paddingTop: 60,
             }}>
-            <div style={{ padding: "12px 16px 80px" }}>
-              {/* All nav links */}
-              {[
-                { href: "/", label: "Home", icon: Home },
-                { href: "/browse", label: "Browse Food", icon: Search },
-                { href: "/recipes", label: "Recipes", icon: BookOpen },
-                { href: "/grocery", label: "Grocery", icon: ShoppingBasket },
-                ...(isLoggedIn ? [{ href: "/favorites", label: "Favorites", icon: Heart }] : []),
-                { href: "/subscription", label: "Subscriptions", icon: CalendarCheck },
-                { href: "/party-orders", label: "Party Orders", icon: PartyPopper },
-                { href: "/about", label: "About", icon: Info },
-                { href: "/contact", label: "Contact", icon: Phone },
-              ].map((link) => (
-                <Link key={link.href} href={link.href} onClick={() => setOpen(false)} style={{
-                  display: "flex", alignItems: "center", gap: 10, padding: "11px 14px",
-                  borderRadius: 10, fontSize: 14, fontWeight: 600, marginBottom: 2,
-                  color: pathname === link.href ? "#16a34a" : "#374151",
-                  background: pathname === link.href ? "#f0fdf4" : "transparent",
-                }}>
-                  <link.icon size={18} /> {link.label}
-                </Link>
-              ))}
+            <div style={{ padding: "8px 16px 70px" }}>
+              {/* All nav links in compact grid */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
+                {[
+                  { href: "/", label: "Home", icon: Home },
+                  { href: "/browse", label: "Browse Food", icon: Search },
+                  { href: "/recipes", label: "Recipes", icon: BookOpen },
+                  { href: "/grocery", label: "Grocery", icon: ShoppingBasket },
+                  ...(isLoggedIn ? [{ href: "/favorites", label: "Favorites", icon: Heart }] : []),
+                  { href: "/subscription", label: "Subscriptions", icon: CalendarCheck },
+                  { href: "/party-orders", label: "Party Orders", icon: PartyPopper },
+                  { href: "/about", label: "About", icon: Info },
+                  { href: "/contact", label: "Contact", icon: Phone },
+                ].map((link) => (
+                  <Link key={link.href} href={link.href} onClick={() => setOpen(false)} style={{
+                    display: "flex", alignItems: "center", gap: 8, padding: "10px 12px",
+                    borderRadius: 10, fontSize: 13, fontWeight: 600,
+                    color: pathname === link.href ? "#16a34a" : "#374151",
+                    background: pathname === link.href ? "#f0fdf4" : "#f9fafb",
+                    border: pathname === link.href ? "1px solid #16a34a" : "1px solid #e5e7eb",
+                  }}>
+                    <link.icon size={16} /> {link.label}
+                  </Link>
+                ))}
+              </div>
 
               {/* Login/Signup for guests */}
               {!isLoggedIn && (
