@@ -284,6 +284,24 @@ export default function Navbar() {
             </div>
           )}
 
+          {/* Mobile top quick links */}
+          <div className="show-mobile" style={{ display: "none", alignItems: "center", gap: 4 }}>
+            {[
+              { href: "/subscription", icon: CalendarCheck, label: "Subscribe" },
+              { href: "/party-orders", icon: PartyPopper, label: "Party" },
+              { href: "/about", icon: Info, label: "About" },
+              { href: "/contact", icon: Phone, label: "Contact" },
+            ].map((item) => (
+              <Link key={item.href} href={item.href} title={item.label} style={{
+                width: 34, height: 34, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center",
+                background: pathname === item.href ? "#f0fdf4" : "#f3f4f6",
+                color: pathname === item.href ? "#16a34a" : "#6b7280",
+              }}>
+                <item.icon size={16} />
+              </Link>
+            ))}
+          </div>
+
           {/* Mobile menu toggle */}
           <button onClick={() => setOpen(!open)} className="show-mobile"
             style={{ display: "none", width: 42, height: 42, background: "#f3f4f6", border: "none", borderRadius: 10, cursor: "pointer", alignItems: "center", justifyContent: "center" }}>
