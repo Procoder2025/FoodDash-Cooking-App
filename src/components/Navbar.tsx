@@ -345,11 +345,11 @@ export default function Navbar() {
       </AnimatePresence>
 
       <style>{`
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
           .hidden-mobile { display: none !important; }
           .show-mobile { display: flex !important; }
         }
-        @media (min-width: 769px) { .show-mobile { display: none !important; } }
+        @media (min-width: 1025px) { .show-mobile { display: none !important; } }
         @media (max-width: 640px) {
           .nav-cart-text { display: none; }
           header { height: 52px !important; }
