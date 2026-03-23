@@ -126,7 +126,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return true;
   }, []);
 
-  const signup = useCallback(async (data: SignupData) => {
+  const signup = useCallback(async (data: SignupData): Promise<string | true> => {
     // Check if email already exists
     const { data: existing } = await supabase
       .from("users")
@@ -134,7 +134,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .eq("email", data.email)
       .single();
 
-    if (existing) return false;
+    if (existing) return "This email is already registered. Please login instead.";
 
     // 1. Insert into main users table
     const { data: newRow, error } = await supabase
@@ -157,7 +157,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     if (error || !newRow) {
       console.error("Signup error:", error);
-      return false;
+      return error?.message || "Signup failed. Please try again.";
     }
 
     // 2. Insert into role-specific table

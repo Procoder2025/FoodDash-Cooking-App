@@ -77,16 +77,16 @@ function SignupContent() {
     }
 
     setLoading(true);
-    const ok = await signup({ ...form, role });
+    const result = await signup({ ...form, role });
     setLoading(false);
 
-    if (ok) {
+    if (result === true) {
       setSuccess(true);
       setTimeout(() => {
         router.push(role === "cooker" ? "/dashboard/cooker" : role === "delivery" ? "/dashboard/delivery" : "/browse");
       }, 2000);
     } else {
-      setGlobalError("This email is already registered. Please login instead.");
+      setGlobalError(result || "Signup failed. Please try again.");
     }
   };
 
