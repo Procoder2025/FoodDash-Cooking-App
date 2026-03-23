@@ -284,7 +284,11 @@ export default function Navbar() {
             </div>
           )}
 
-          {/* Mobile hamburger — hidden, using bottom tab bar instead */}
+          {/* Mobile menu toggle */}
+          <button onClick={() => setOpen(!open)} className="show-mobile"
+            style={{ display: "none", width: 42, height: 42, background: "#f3f4f6", border: "none", borderRadius: 10, cursor: "pointer", alignItems: "center", justifyContent: "center" }}>
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
       </div>
 
@@ -327,32 +331,45 @@ export default function Navbar() {
         {open && (
           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}
             className="show-mobile" style={{ display: "none", background: "#fff", borderTop: "1px solid #e5e7eb", overflow: "hidden" }}>
-            <div style={{ padding: "12px 20px 16px" }}>
+            <div style={{ padding: "12px 16px 16px" }}>
+              {/* All nav links */}
+              {navLinks.flatMap((item: any) => item.children ? item.children : [item]).map((link: any) => (
+                <Link key={link.href} href={link.href} onClick={() => setOpen(false)} style={{
+                  display: "flex", alignItems: "center", gap: 10, padding: "11px 14px",
+                  borderRadius: 10, fontSize: 14, fontWeight: 600, marginBottom: 2,
+                  color: pathname === link.href ? "#16a34a" : "#374151",
+                  background: pathname === link.href ? "#f0fdf4" : "transparent",
+                }}>
+                  <link.icon size={18} /> {link.label}
+                </Link>
+              ))}
+
+              {/* Login/Signup for guests */}
               {!isLoggedIn && (
-                <div>
-                  <p style={{ fontSize: 12, fontWeight: 700, color: "#9ca3af", marginBottom: 8, textTransform: "uppercase" }}>Login as</p>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 14 }}>
+                <div style={{ marginTop: 12, borderTop: "1px solid #e5e7eb", paddingTop: 12 }}>
+                  <p style={{ fontSize: 11, fontWeight: 700, color: "#9ca3af", marginBottom: 8, textTransform: "uppercase" }}>Login as</p>
+                  <div style={{ display: "flex", gap: 6, marginBottom: 12 }}>
                     {[
                       { role: "customer", label: "Customer", icon: ShoppingBag, color: "#3b82f6" },
                       { role: "cooker", label: "Home Chef", icon: ChefHat, color: "#16a34a" },
                       { role: "delivery", label: "Delivery Partner", icon: Bike, color: "#f59e0b" },
                     ].map((item) => (
                       <Link key={item.role} href={`/auth/login?role=${item.role}`} onClick={() => setOpen(false)}
-                        style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 16px", borderRadius: 10, border: "1px solid #e5e7eb", fontSize: 14, fontWeight: 600, color: "#374151" }}>
-                        <item.icon size={18} color={item.color} /> {item.label}
+                        style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "10px 8px", borderRadius: 10, border: "1px solid #e5e7eb", fontSize: 12, fontWeight: 600, color: "#374151" }}>
+                        <item.icon size={16} color={item.color} /> {item.label}
                       </Link>
                     ))}
                   </div>
-                  <p style={{ fontSize: 12, fontWeight: 700, color: "#9ca3af", marginBottom: 8, textTransform: "uppercase" }}>Sign Up as</p>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                  <p style={{ fontSize: 11, fontWeight: 700, color: "#9ca3af", marginBottom: 8, textTransform: "uppercase" }}>Sign Up as</p>
+                  <div style={{ display: "flex", gap: 6 }}>
                     {[
-                      { role: "customer", label: "Customer", icon: ShoppingBag, color: "#3b82f6" },
-                      { role: "cooker", label: "Home Chef", icon: ChefHat, color: "#16a34a" },
-                      { role: "delivery", label: "Delivery Partner", icon: Bike, color: "#f59e0b" },
+                      { role: "customer", label: "Customer", icon: ShoppingBag, color: "#fff" },
+                      { role: "cooker", label: "Home Chef", icon: ChefHat, color: "#fff" },
+                      { role: "delivery", label: "Delivery Partner", icon: Bike, color: "#fff" },
                     ].map((item) => (
                       <Link key={item.role} href={`/auth/signup?role=${item.role}`} onClick={() => setOpen(false)}
-                        style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 16px", borderRadius: 10, background: "#16a34a", color: "#fff", fontSize: 14, fontWeight: 600 }}>
-                        <item.icon size={18} color="#fff" /> {item.label}
+                        style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "10px 8px", borderRadius: 10, background: "#16a34a", color: "#fff", fontSize: 12, fontWeight: 600 }}>
+                        <item.icon size={16} color="#fff" /> {item.label}
                       </Link>
                     ))}
                   </div>
