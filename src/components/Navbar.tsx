@@ -284,46 +284,43 @@ export default function Navbar() {
             </div>
           )}
 
-          {/* Mobile toggle — only show when not logged in (for role selection) */}
-          {!isLoggedIn && (
-            <button onClick={() => setOpen(!open)} className="show-mobile"
-              style={{ display: "none", width: 42, height: 42, background: "#f3f4f6", border: "none", borderRadius: 10, cursor: "pointer", alignItems: "center", justifyContent: "center" }}>
-              {open ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          )}
+          {/* Mobile hamburger — hidden, using bottom tab bar instead */}
         </div>
       </div>
 
-      {/* Mobile Nav Grid */}
-      <div className="mobile-nav-bar" style={{ display: "none", flexWrap: "wrap", justifyContent: "center", background: "#fff", borderTop: "1px solid #f3f4f6", borderBottom: "1px solid #f3f4f6", padding: "8px 10px", gap: 6 }}>
-        {navLinks.flatMap((item: any) => {
-          const items = item.children ? item.children : [item];
-          return items.map((link: any) => {
-            const active = pathname === link.href;
-            return (
-              <Link key={link.href} href={link.href} style={{
-                display: "flex", alignItems: "center", gap: 4, padding: "6px 12px",
-                borderRadius: 50, fontSize: 11, fontWeight: 600,
-                color: active ? "#fff" : "#4b5563",
-                background: active ? "#16a34a" : "#f3f4f6",
-                boxShadow: active ? "0 2px 8px rgba(22,163,74,0.3)" : "none",
-              }}>
-                <link.icon size={12} /> {link.label}
-              </Link>
-            );
-          });
+      {/* Mobile Bottom Tab Bar — fixed at bottom like real apps */}
+      <nav className="mobile-bottom-bar" style={{
+        display: "none", position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 200,
+        background: "#fff", borderTop: "1px solid #e5e7eb",
+        boxShadow: "0 -2px 10px rgba(0,0,0,0.08)",
+        padding: "6px 0 env(safe-area-inset-bottom, 4px)",
+        justifyContent: "space-around", alignItems: "center",
+      }}>
+        {[
+          { href: "/", label: "Home", icon: Home },
+          { href: "/browse", label: "Browse", icon: Search },
+          { href: "/recipes", label: "Recipes", icon: BookOpen },
+          { href: "/grocery", label: "Grocery", icon: ShoppingBasket },
+          ...(isLoggedIn ? [
+            { href: "/favorites", label: "Favorites", icon: Heart },
+          ] : [
+            { href: "/auth/login?role=customer", label: "Login", icon: User },
+          ]),
+        ].map((item) => {
+          const active = pathname === item.href;
+          return (
+            <Link key={item.href} href={item.href} style={{
+              display: "flex", flexDirection: "column", alignItems: "center", gap: 2,
+              fontSize: 10, fontWeight: active ? 700 : 500, padding: "4px 8px",
+              color: active ? "#16a34a" : "#6b7280",
+              textDecoration: "none",
+            }}>
+              <item.icon size={20} strokeWidth={active ? 2.5 : 1.5} />
+              {item.label}
+            </Link>
+          );
         })}
-        {!isLoggedIn && (
-          <>
-            <Link href="/auth/login?role=customer" style={{ display: "flex", alignItems: "center", gap: 4, padding: "6px 12px", borderRadius: 50, fontSize: 11, fontWeight: 700, color: "#16a34a", background: "#f0fdf4", border: "1.5px solid #16a34a" }}>
-              Login
-            </Link>
-            <Link href="/auth/signup?role=customer" style={{ display: "flex", alignItems: "center", gap: 4, padding: "6px 12px", borderRadius: 50, fontSize: 11, fontWeight: 700, color: "#fff", background: "#16a34a" }}>
-              Sign Up
-            </Link>
-          </>
-        )}
-      </div>
+      </nav>
 
       {/* Mobile Dropdown (hamburger) — kept for login/signup role selection */}
       <AnimatePresence>
@@ -367,15 +364,15 @@ export default function Navbar() {
       </AnimatePresence>
 
       <style>{`
-        .mobile-nav-bar::-webkit-scrollbar { display: none; }
         @media (max-width: 1024px) {
           .hidden-mobile { display: none !important; }
           .show-mobile { display: flex !important; }
-          .mobile-nav-bar { display: flex !important; }
+          .mobile-bottom-bar { display: flex !important; }
+          body > main, body { padding-bottom: 60px !important; }
         }
         @media (min-width: 1025px) {
           .show-mobile { display: none !important; }
-          .mobile-nav-bar { display: none !important; }
+          .mobile-bottom-bar { display: none !important; }
         }
         @media (max-width: 640px) {
           .nav-cart-text { display: none; }
