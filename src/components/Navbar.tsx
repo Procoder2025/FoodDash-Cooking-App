@@ -284,11 +284,13 @@ export default function Navbar() {
             </div>
           )}
 
-          {/* Mobile toggle */}
-          <button onClick={() => setOpen(!open)} className="show-mobile"
-            style={{ display: "none", width: 42, height: 42, background: "#f3f4f6", border: "none", borderRadius: 10, cursor: "pointer", alignItems: "center", justifyContent: "center" }}>
-            {open ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          {/* Mobile toggle — only show when not logged in (for role selection) */}
+          {!isLoggedIn && (
+            <button onClick={() => setOpen(!open)} className="show-mobile"
+              style={{ display: "none", width: 42, height: 42, background: "#f3f4f6", border: "none", borderRadius: 10, cursor: "pointer", alignItems: "center", justifyContent: "center" }}>
+              {open ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          )}
         </div>
       </div>
 
