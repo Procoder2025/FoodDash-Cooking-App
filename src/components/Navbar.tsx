@@ -296,19 +296,22 @@ export default function Navbar() {
 
       {/* Mobile Nav Grid */}
       <div className="mobile-nav-bar" style={{ display: "none", flexWrap: "wrap", justifyContent: "center", background: "#fff", borderTop: "1px solid #f3f4f6", borderBottom: "1px solid #f3f4f6", padding: "8px 10px", gap: 6 }}>
-        {navLinks.map((item) => {
-          const active = pathname === item.href;
-          return (
-            <Link key={item.href} href={item.href} style={{
-              display: "flex", alignItems: "center", gap: 4, padding: "6px 12px",
-              borderRadius: 50, fontSize: 11, fontWeight: 600,
-              color: active ? "#fff" : "#4b5563",
-              background: active ? "#16a34a" : "#f3f4f6",
-              boxShadow: active ? "0 2px 8px rgba(22,163,74,0.3)" : "none",
-            }}>
-              <item.icon size={12} /> {item.label}
-            </Link>
-          );
+        {navLinks.flatMap((item: any) => {
+          const items = item.children ? item.children : [item];
+          return items.map((link: any) => {
+            const active = pathname === link.href;
+            return (
+              <Link key={link.href} href={link.href} style={{
+                display: "flex", alignItems: "center", gap: 4, padding: "6px 12px",
+                borderRadius: 50, fontSize: 11, fontWeight: 600,
+                color: active ? "#fff" : "#4b5563",
+                background: active ? "#16a34a" : "#f3f4f6",
+                boxShadow: active ? "0 2px 8px rgba(22,163,74,0.3)" : "none",
+              }}>
+                <link.icon size={12} /> {link.label}
+              </Link>
+            );
+          });
         })}
         {!isLoggedIn && (
           <>
