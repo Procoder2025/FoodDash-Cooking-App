@@ -327,7 +327,17 @@ export default function Navbar() {
             style={{ background: "#fff", borderTop: "1px solid #e5e7eb", overflow: "hidden", position: "relative", zIndex: 999 }}>
             <div style={{ padding: "12px 16px 16px" }}>
               {/* All nav links */}
-              {navLinks.flatMap((item: any) => item.children ? item.children : [item]).map((link: any) => (
+              {[
+                { href: "/", label: "Home", icon: Home },
+                { href: "/browse", label: "Browse Food", icon: Search },
+                { href: "/recipes", label: "Recipes", icon: BookOpen },
+                { href: "/grocery", label: "Grocery", icon: ShoppingBasket },
+                ...(isLoggedIn ? [{ href: "/favorites", label: "Favorites", icon: Heart }] : []),
+                { href: "/subscription", label: "Subscriptions", icon: CalendarCheck },
+                { href: "/party-orders", label: "Party Orders", icon: PartyPopper },
+                { href: "/about", label: "About", icon: Info },
+                { href: "/contact", label: "Contact", icon: Phone },
+              ].map((link) => (
                 <Link key={link.href} href={link.href} onClick={() => setOpen(false)} style={{
                   display: "flex", alignItems: "center", gap: 10, padding: "11px 14px",
                   borderRadius: 10, fontSize: 14, fontWeight: 600, marginBottom: 2,
