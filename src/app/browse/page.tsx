@@ -51,7 +51,10 @@ export default function BrowsePage() {
   const getCartItem = (foodId: string) => items.find((i) => i.id === foodId);
 
   const handleAdd = (food: any) => {
-    // Anyone can add to cart — signup required only at checkout
+    if (!isLoggedIn) {
+      router.push("/auth/signup?role=customer");
+      return;
+    }
     const cook = { id: food.cookerId, kitchenName: food.kitchenName, deliveryFee: 25, isOpen: true } as any;
     const menuItem = { id: food.id, name: food.name, description: food.description, price: food.price, image: food.image, category: food.category, isVeg: food.isVeg, rating: food.rating, bestseller: false };
     addItem(menuItem, cook);

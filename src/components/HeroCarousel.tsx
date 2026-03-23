@@ -200,8 +200,8 @@ export default function HeroCarousel() {
                   <ChevronLeft size={16} />
                 </button>
                 {slides.map((_, i) => (
-                  <button key={i} onClick={() => setCurrent(i)} className="hero-dot" style={{
-                    width: current === i ? 28 : 9, height: 9, borderRadius: 50, border: "none", cursor: "pointer",
+                  <button key={i} onClick={() => setCurrent(i)} className={`hero-dot ${current === i ? "hero-dot-active" : ""}`} style={{
+                    borderRadius: 50, border: "none", cursor: "pointer",
                     background: current === i ? "#4ade80" : "rgba(255,255,255,0.3)",
                     transition: "all 0.3s",
                   }} />
@@ -282,6 +282,8 @@ export default function HeroCarousel() {
           color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
           transition: background 0.2s;
         }
+        .hero-dot { width: 9px; height: 9px; }
+        .hero-dot-active { width: 28px; }
         .trust-bar {
           max-width: 1200px; margin: 0 auto;
           display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px 20px;
@@ -293,10 +295,11 @@ export default function HeroCarousel() {
           .hero-image { flex-basis: 100%; }
           .hero-desc { margin-left: auto; margin-right: auto; font-size: 13px; }
           .hero-btn-primary, .hero-btn-secondary { padding: 12px 20px; font-size: 14px; }
-          .hero-nav { gap: 5px !important; margin-top: 8px !important; }
-          .hero-nav-btn { width: 22px !important; height: 22px !important; }
-          .hero-nav-btn svg { width: 10px; height: 10px; }
-          .hero-dot { width: 6px !important; height: 6px !important; }
+          .hero-nav { gap: 4px !important; margin-top: 6px !important; }
+          .hero-nav-btn { width: 20px !important; height: 20px !important; }
+          .hero-nav-btn svg { width: 10px !important; height: 10px !important; }
+          .hero-dot { width: 5px !important; height: 5px !important; }
+          .hero-dot-active { width: 16px !important; height: 5px !important; }
           .trust-bar { gap: 12px 20px; justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; -ms-overflow-style: none; scrollbar-width: none; }
           .trust-bar::-webkit-scrollbar { display: none; }
         }
