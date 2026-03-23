@@ -298,7 +298,7 @@ export default function HeroCarousel() {
           display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px 20px;
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 1024px) {
           .hero-wrapper { min-height: auto !important; }
           .hero-layout { flex-direction: column; gap: 14px; padding: 20px 16px !important; }
           .hero-text { flex-basis: 100%; text-align: center; }
@@ -307,19 +307,13 @@ export default function HeroCarousel() {
           .hero-sub { font-size: 15px !important; }
           .hero-desc { margin-left: auto; margin-right: auto; font-size: 12px; margin-bottom: 14px !important; }
           .hero-btn-primary, .hero-btn-secondary { padding: 10px 16px; font-size: 13px; }
-          .hero-nav { gap: 4px !important; margin-top: 6px !important; }
-          .hero-nav-btn { width: 20px !important; height: 20px !important; }
-          .hero-nav-btn svg { width: 10px !important; height: 10px !important; }
-          .hero-dot { width: 5px !important; height: 5px !important; }
-          .hero-dot-active { width: 16px !important; height: 5px !important; }
+          .hero-nav { gap: 3px !important; margin-top: 6px !important; }
+          .hero-nav-btn { width: 18px !important; height: 18px !important; }
+          .hero-nav-btn svg { width: 8px !important; height: 8px !important; }
+          .hero-dot { width: 4px !important; height: 4px !important; }
+          .hero-dot-active { width: 14px !important; height: 4px !important; }
           .trust-bar { gap: 10px 16px; justify-content: center; flex-wrap: wrap; }
           .trust-item { font-size: 11px !important; }
-        }
-
-        @media (min-width: 641px) and (max-width: 900px) {
-          .hero-layout { gap: 24px; }
-          .hero-text { flex-basis: 100%; }
-          .hero-image { flex-basis: 100%; }
         }
       `}</style>
     </div>
