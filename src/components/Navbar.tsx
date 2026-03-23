@@ -78,7 +78,7 @@ export default function Navbar() {
       ];
 
   return (
-    <header ref={navRef} style={{ position: "sticky", top: 0, zIndex: 100, background: "rgba(255,255,255,0.7)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", borderBottom: "1px solid rgba(229,231,235,0.5)", boxShadow: "0 1px 3px rgba(0,0,0,0.05)" }}>
+    <header ref={navRef} style={{ position: "sticky", top: 0, zIndex: 9999, background: "rgba(255,255,255,0.95)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", borderBottom: "1px solid rgba(229,231,235,0.5)", boxShadow: "0 1px 3px rgba(0,0,0,0.05)" }}>
       <div style={{ maxWidth: "100%", margin: "0", padding: "0 16px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68, position: "relative" }}>
         {/* Logo */}
         <Link href={isCooker ? "/dashboard/cooker" : "/"} style={{ display: "flex", alignItems: "center", gap: 10, marginRight: "auto" }}>
@@ -323,9 +323,13 @@ export default function Navbar() {
       {/* Mobile Dropdown (hamburger) — kept for login/signup role selection */}
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
-            style={{ background: "#fff", borderTop: "1px solid #e5e7eb", position: "relative", zIndex: 999, maxHeight: "80vh", overflowY: "auto", boxShadow: "0 4px 20px rgba(0,0,0,0.1)" }}>
-            <div style={{ padding: "12px 16px 16px" }}>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            style={{
+              position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+              background: "#fff", zIndex: 9998,
+              overflowY: "auto", paddingTop: 70,
+            }}>
+            <div style={{ padding: "12px 16px 80px" }}>
               {/* All nav links */}
               {[
                 { href: "/", label: "Home", icon: Home },
