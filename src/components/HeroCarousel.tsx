@@ -287,14 +287,23 @@ export default function HeroCarousel() {
           padding: 13px 24px; border-radius: 12px; font-size: 15px; font-weight: 600;
           border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(4px);
         }
+        .hero-nav { gap: 3px !important; margin-top: 6px !important; }
         .hero-nav-btn {
-          width: 34px; height: 34px; border-radius: 50%;
+          width: 18px; height: 18px; border-radius: 50%;
           background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.15);
           color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
           transition: background 0.2s;
         }
-        .hero-dot { width: 9px; height: 9px; }
-        .hero-dot-active { width: 28px; }
+        .hero-nav-btn svg { width: 8px; height: 8px; }
+        .hero-dot { width: 4px; height: 4px; }
+        .hero-dot-active { width: 14px; }
+        @media (min-width: 1025px) {
+          .hero-nav { gap: 8px !important; margin-top: 14px !important; }
+          .hero-nav-btn { width: 34px; height: 34px; }
+          .hero-nav-btn svg { width: 16px; height: 16px; }
+          .hero-dot { width: 9px; height: 9px; }
+          .hero-dot-active { width: 28px; }
+        }
         .trust-bar {
           max-width: 1200px; margin: 0 auto;
           display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px 20px;
@@ -310,11 +319,6 @@ export default function HeroCarousel() {
           .hero-sub { font-size: 15px !important; }
           .hero-desc { margin-left: auto; margin-right: auto; font-size: 12px; margin-bottom: 14px !important; }
           .hero-btn-primary, .hero-btn-secondary { padding: 10px 16px; font-size: 13px; }
-          .hero-nav { gap: 3px !important; margin-top: 6px !important; }
-          .hero-nav-btn { width: 18px !important; height: 18px !important; }
-          .hero-nav-btn svg { width: 8px !important; height: 8px !important; }
-          .hero-dot { width: 4px !important; height: 4px !important; }
-          .hero-dot-active { width: 14px !important; height: 4px !important; }
           .trust-bar { gap: 10px 16px; justify-content: center; flex-wrap: wrap; }
           .trust-item { font-size: 11px !important; }
         }
