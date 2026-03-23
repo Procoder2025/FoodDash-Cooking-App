@@ -192,7 +192,7 @@ export default function HeroCarousel() {
               </motion.div>
 
               {/* Navigation */}
-              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 8, marginTop: 14 }}>
+              <div className="hero-nav" style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 8, marginTop: 14 }}>
                 <button onClick={prev} className="hero-nav-btn"
                   onMouseEnter={(e) => { e.currentTarget.style.background = "#16a34a"; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.12)"; }}
@@ -200,7 +200,7 @@ export default function HeroCarousel() {
                   <ChevronLeft size={16} />
                 </button>
                 {slides.map((_, i) => (
-                  <button key={i} onClick={() => setCurrent(i)} style={{
+                  <button key={i} onClick={() => setCurrent(i)} className="hero-dot" style={{
                     width: current === i ? 28 : 9, height: 9, borderRadius: 50, border: "none", cursor: "pointer",
                     background: current === i ? "#4ade80" : "rgba(255,255,255,0.3)",
                     transition: "all 0.3s",
@@ -293,6 +293,10 @@ export default function HeroCarousel() {
           .hero-image { flex-basis: 100%; }
           .hero-desc { margin-left: auto; margin-right: auto; font-size: 13px; }
           .hero-btn-primary, .hero-btn-secondary { padding: 12px 20px; font-size: 14px; }
+          .hero-nav { gap: 5px !important; margin-top: 8px !important; }
+          .hero-nav-btn { width: 22px !important; height: 22px !important; }
+          .hero-nav-btn svg { width: 10px; height: 10px; }
+          .hero-dot { width: 6px !important; height: 6px !important; }
           .trust-bar { gap: 12px 20px; justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; -ms-overflow-style: none; scrollbar-width: none; }
           .trust-bar::-webkit-scrollbar { display: none; }
         }
