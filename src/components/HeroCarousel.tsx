@@ -302,7 +302,7 @@ export default function HeroCarousel() {
           .hero-wrapper { min-height: auto !important; }
           .hero-layout { flex-direction: column; gap: 14px; padding: 20px 16px !important; }
           .hero-text { flex-basis: 100%; text-align: center; }
-          .hero-image { flex-basis: 100%; }
+          .hero-image { flex-basis: 100%; width: 100%; }
           .hero-title { font-size: 22px !important; margin-bottom: 8px !important; }
           .hero-sub { font-size: 15px !important; }
           .hero-desc { margin-left: auto; margin-right: auto; font-size: 12px; margin-bottom: 14px !important; }

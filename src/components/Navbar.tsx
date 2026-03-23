@@ -294,25 +294,28 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {/* Mobile Horizontal Scrollable Nav */}
-      <div className="mobile-nav-bar" style={{ display: "none", overflowX: "auto", background: "#fff", borderTop: "1px solid #f3f4f6", padding: "6px 10px", gap: 4, WebkitOverflowScrolling: "touch", msOverflowStyle: "none", scrollbarWidth: "none" }}>
-        {navLinks.map((item) => (
-          <Link key={item.href} href={item.href} style={{
-            display: "flex", alignItems: "center", gap: 4, padding: "6px 12px", whiteSpace: "nowrap",
-            borderRadius: 50, fontSize: 11, fontWeight: 600,
-            color: pathname === item.href ? "#fff" : "#4b5563",
-            background: pathname === item.href ? "#16a34a" : "#f3f4f6",
-          }}>
-            <item.icon size={13} /> {item.label}
-          </Link>
-        ))}
+      <div className="mobile-nav-bar" style={{ display: "none", overflowX: "auto", background: "#fff", borderTop: "1px solid #f3f4f6", borderBottom: "1px solid #f3f4f6", padding: "8px 12px", gap: 6, WebkitOverflowScrolling: "touch", msOverflowStyle: "none", scrollbarWidth: "none" }}>
+        {navLinks.map((item) => {
+          const active = pathname === item.href;
+          return (
+            <Link key={item.href} href={item.href} style={{
+              display: "flex", alignItems: "center", gap: 5, padding: "7px 14px", whiteSpace: "nowrap",
+              borderRadius: 50, fontSize: 12, fontWeight: 600, flexShrink: 0,
+              color: active ? "#fff" : "#4b5563",
+              background: active ? "#16a34a" : "#f3f4f6",
+              boxShadow: active ? "0 2px 8px rgba(22,163,74,0.3)" : "none",
+            }}>
+              <item.icon size={14} /> {item.label}
+            </Link>
+          );
+        })}
         {!isLoggedIn && (
           <>
-            <Link href="/auth/login?role=customer" style={{ display: "flex", alignItems: "center", gap: 4, padding: "6px 12px", whiteSpace: "nowrap", borderRadius: 50, fontSize: 11, fontWeight: 700, color: "#16a34a", background: "#f0fdf4", border: "1px solid #16a34a" }}>
+            <Link href="/auth/login?role=customer" style={{ display: "flex", alignItems: "center", gap: 5, padding: "7px 14px", whiteSpace: "nowrap", borderRadius: 50, fontSize: 12, fontWeight: 700, color: "#16a34a", background: "#f0fdf4", border: "1.5px solid #16a34a", flexShrink: 0 }}>
               Login
             </Link>
-            <Link href="/auth/signup?role=customer" style={{ display: "flex", alignItems: "center", gap: 4, padding: "6px 12px", whiteSpace: "nowrap", borderRadius: 50, fontSize: 11, fontWeight: 700, color: "#fff", background: "#16a34a" }}>
+            <Link href="/auth/signup?role=customer" style={{ display: "flex", alignItems: "center", gap: 5, padding: "7px 14px", whiteSpace: "nowrap", borderRadius: 50, fontSize: 12, fontWeight: 700, color: "#fff", background: "#16a34a", flexShrink: 0 }}>
               Sign Up
             </Link>
           </>
