@@ -293,13 +293,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Bottom Tab Bar — fixed at bottom like real apps */}
-      <nav className="mobile-bottom-bar" style={{
-        display: "none", position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 200,
-        background: "#fff", borderTop: "1px solid #e5e7eb",
-        boxShadow: "0 -2px 10px rgba(0,0,0,0.08)",
-        padding: "6px 0 env(safe-area-inset-bottom, 4px)",
-        justifyContent: "space-around", alignItems: "center",
-      }}>
+      <nav className="mobile-bottom-bar">
         {[
           { href: "/", label: "Home", icon: Home },
           { href: "/browse", label: "Browse", icon: Search },
@@ -384,12 +378,19 @@ export default function Navbar() {
         @media (max-width: 1024px) {
           .hidden-mobile { display: none !important; }
           .show-mobile { display: flex !important; }
-          .mobile-bottom-bar { display: flex !important; }
+          .mobile-bottom-bar {
+            display: flex !important;
+            position: fixed !important; bottom: 0 !important; left: 0 !important; right: 0 !important;
+            z-index: 200; background: #fff; border-top: 1px solid #e5e7eb;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+            padding: 6px 0 env(safe-area-inset-bottom, 4px);
+            justify-content: space-around; align-items: center;
+          }
           body > main, body { padding-bottom: 60px !important; }
         }
         @media (min-width: 1025px) {
           .show-mobile { display: none !important; }
-          .mobile-bottom-bar { display: none !important; }
+          .mobile-bottom-bar { display: none !important; position: static !important; }
         }
         @media (max-width: 640px) {
           .nav-cart-text { display: none; }
