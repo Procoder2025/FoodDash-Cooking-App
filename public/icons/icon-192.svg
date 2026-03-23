@@ -1,0 +1,6 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 192 192'>
+    <rect width='192' height='192' rx='28.799999999999997' fill='#16a34a'/>
+    <circle cx='96' cy='80.64' r='42.24' fill='rgba(255,255,255,0.2)'/>
+    <text x='96' y='92.16' text-anchor='middle' fill='white' font-size='48' font-weight='900' font-family='sans-serif'>FD</text>
+    <text x='96' y='144' text-anchor='middle' fill='rgba(255,255,255,0.9)' font-size='17.28' font-weight='700' font-family='sans-serif'>FoodDash</text>
+  </svg>

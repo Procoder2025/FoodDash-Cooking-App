@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  background: #ffffff;
+  color: #111827;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; }
+img { display: block; max-width: 100%; }
+
+/* Swiper bullets */
+.swiper-pagination-bullet {
+  width: 10px !important;
+  height: 10px !important;
+  background: rgba(255,255,255,0.5) !important;
+  transition: all 0.3s !important;
+}
+.swiper-pagination-bullet-active {
+  background: #16a34a !important;
+  width: 24px !important;
+  border-radius: 5px !important;
+  opacity: 1 !important;
+}
+
+/* Hide scrollbar */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  body { font-size: 14px; }
+  section { padding-left: 14px !important; padding-right: 14px !important; }
+
+  /* Browse page: single column food cards */
+  .food-grid { grid-template-columns: 1fr !important; }
+
+  /* Footer: stack columns */
+  footer > div > div > div:first-child > div {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  /* Browse page: 2 columns */
+  .food-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important; }
+}
+
+/* Touch-friendly tap targets */
+@media (pointer: coarse) {
+  button, a { min-height: 44px; }
+}
+
+/* Smooth touch scrolling */
+.scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+.scroll-x > * { scroll-snap-align: start; }

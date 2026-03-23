@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\"D:/Program Files/flutter_windows_3.29.3-stable/flutter/bin/flutter.bat\" create --org com.fooddash --project-name fooddash \"D:/HTML PROGRAMS/Food Delivery App/flutter_app\")",
+      "Bash(FLUTTER=\"D:\\\\Program Files\\\\flutter_windows_3.29.3-stable\\\\flutter\\\\bin\\\\flutter.bat\")",
+      "Bash(cmd //c \"\"\"$FLUTTER\"\" create --org com.fooddash --project-name fooddash \"\"D:\\\\HTML PROGRAMS\\\\Food Delivery App\\\\flutter_app\"\"\")",
+      "Read(//d/HTML PROGRAMS/**)",
+      "Bash(cmd.exe /c \"\"\"D:\\\\Program Files\\\\flutter_windows_3.29.3-stable\\\\flutter\\\\bin\\\\flutter.bat\"\" create --org com.fooddash --project-name fooddash flutter_app\")",
+      "Bash(cmd /c \"start ms-settings:developers\")",
+      "Bash(flutter pub:*)",
+      "Bash(npm i:*)",
+      "Bash(vercel login:*)"
+    ],
+    "additionalDirectories": [
+      "D:\\HTML PROGRAMS\\flutter_app"
+    ]
+  }
+}
