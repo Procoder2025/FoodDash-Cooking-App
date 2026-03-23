@@ -277,6 +277,13 @@ function TrackContent() {
 }
 
 export default function TrackPage() {
+  const { isLoggedIn } = useAuth();
+
+  if (!isLoggedIn) {
+    if (typeof window !== "undefined") window.location.href = "/auth/signup?role=customer";
+    return null;
+  }
+
   return (
     <Suspense fallback={<div style={{ textAlign: "center", padding: "80px 20px", color: "#6b7280" }}>Loading...</div>}>
       <TrackContent />

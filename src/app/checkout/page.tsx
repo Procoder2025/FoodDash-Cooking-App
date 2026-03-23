@@ -23,8 +23,9 @@ export default function CheckoutPage() {
   const platformFee = 5;
 
   useEffect(() => {
+    if (!isLoggedIn) { router.push("/auth/signup?role=customer"); return; }
     if (items.length === 0) router.push("/cart");
-  }, [items.length, router]);
+  }, [items.length, router, isLoggedIn]);
 
   // Pre-fill form with user data if logged in
   useEffect(() => {

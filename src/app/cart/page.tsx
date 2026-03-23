@@ -1,13 +1,22 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
 import { ShoppingBag, Trash2, ArrowRight, Minus, Plus, Receipt, Truck, IndianRupee, BadgePercent } from "lucide-react";
 import { FadeInUp } from "@/components/AnimatedSection";
 
 export default function CartPage() {
   const { items, kitchenName, updateQuantity, removeItem, clearCart, subtotal, deliveryFee, total } = useCart();
+  const { isLoggedIn } = useAuth();
+  const router = useRouter();
+
+  if (!isLoggedIn) {
+    router.push("/auth/signup?role=customer");
+    return null;
+  }
   const platformFee = 5;
 
   if (items.length === 0) {

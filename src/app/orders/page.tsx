@@ -1,9 +1,10 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useState, useEffect, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "@/context/AuthContext";
 import { ClipboardList, Package, ChefHat, Truck, CheckCircle, MapPin, Phone, Clock, IndianRupee, Star, ShoppingBag, RefreshCw } from "lucide-react";
 
 interface OrderItem {
@@ -330,6 +331,14 @@ function OrdersContent() {
 }
 
 export default function OrdersPage() {
+  const { isLoggedIn } = useAuth();
+  const router = useRouter();
+
+  if (!isLoggedIn) {
+    router.push("/auth/signup?role=customer");
+    return null;
+  }
+
   return (
     <Suspense fallback={
       <div style={{ textAlign: "center", padding: "80px 20px", color: "#6b7280" }}>Loading orders...</div>

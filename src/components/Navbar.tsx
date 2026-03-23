@@ -139,8 +139,8 @@ export default function Navbar() {
 
         {/* Right Actions */}
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          {/* Cart — only for customers */}
-          {!isCooker && !isDelivery && (
+          {/* Cart — only for logged-in customers */}
+          {isLoggedIn && !isCooker && !isDelivery && (
             <Link href="/cart" style={{
               position: "relative", display: "flex", alignItems: "center", gap: 6,
               background: "#16a34a", color: "#fff", padding: "9px 16px", borderRadius: 10,
