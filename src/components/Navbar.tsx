@@ -336,8 +336,10 @@ export default function Navbar() {
           .show-mobile { display: flex !important; }
         }
         @media (min-width: 769px) { .show-mobile { display: none !important; } }
-        @media (max-width: 480px) {
+        @media (max-width: 640px) {
           .nav-cart-text { display: none; }
+          header { height: 52px !important; }
+          header > div { height: 52px !important; padding: 0 12px !important; }
         }
       `}</style>
     </header>

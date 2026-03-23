@@ -60,7 +60,7 @@ export default function HeroCarousel() {
 
   return (
     <div style={{ width: "100%", position: "relative" }}>
-      <div style={{ width: "100%", position: "relative", overflow: "hidden", minHeight: 520 }}>
+      <div className="hero-wrapper" style={{ width: "100%", position: "relative", overflow: "hidden", minHeight: 520 }}>
 
         {/* Blurred Background Image Slideshow */}
         <AnimatePresence mode="wait">
@@ -235,6 +235,7 @@ export default function HeroCarousel() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
               whileHover={{ y: -2, scale: 1.05 }}
+              className="trust-item"
               style={{ display: "flex", alignItems: "center", gap: 8, cursor: "default" }}
             >
               <motion.div whileHover={{ rotate: [0, -10, 10, 0] }} transition={{ duration: 0.4 }}>
@@ -290,18 +291,21 @@ export default function HeroCarousel() {
         }
 
         @media (max-width: 640px) {
-          .hero-layout { flex-direction: column; gap: 24px; }
+          .hero-wrapper { min-height: auto !important; }
+          .hero-layout { flex-direction: column; gap: 14px; padding: 20px 16px !important; }
           .hero-text { flex-basis: 100%; text-align: center; }
           .hero-image { flex-basis: 100%; }
-          .hero-desc { margin-left: auto; margin-right: auto; font-size: 13px; }
-          .hero-btn-primary, .hero-btn-secondary { padding: 12px 20px; font-size: 14px; }
+          .hero-title { font-size: 22px !important; margin-bottom: 8px !important; }
+          .hero-sub { font-size: 15px !important; }
+          .hero-desc { margin-left: auto; margin-right: auto; font-size: 12px; margin-bottom: 14px !important; }
+          .hero-btn-primary, .hero-btn-secondary { padding: 10px 16px; font-size: 13px; }
           .hero-nav { gap: 4px !important; margin-top: 6px !important; }
           .hero-nav-btn { width: 20px !important; height: 20px !important; }
           .hero-nav-btn svg { width: 10px !important; height: 10px !important; }
           .hero-dot { width: 5px !important; height: 5px !important; }
           .hero-dot-active { width: 16px !important; height: 5px !important; }
-          .trust-bar { gap: 12px 20px; justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; -ms-overflow-style: none; scrollbar-width: none; }
-          .trust-bar::-webkit-scrollbar { display: none; }
+          .trust-bar { gap: 10px 16px; justify-content: center; flex-wrap: wrap; }
+          .trust-item { font-size: 11px !important; }
         }
 
         @media (min-width: 641px) and (max-width: 900px) {
