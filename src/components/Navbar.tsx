@@ -323,8 +323,8 @@ export default function Navbar() {
       {/* Mobile Dropdown (hamburger) — kept for login/signup role selection */}
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}
-            style={{ background: "#fff", borderTop: "1px solid #e5e7eb", overflow: "hidden", position: "relative", zIndex: 999 }}>
+          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
+            style={{ background: "#fff", borderTop: "1px solid #e5e7eb", position: "relative", zIndex: 999, maxHeight: "80vh", overflowY: "auto", boxShadow: "0 4px 20px rgba(0,0,0,0.1)" }}>
             <div style={{ padding: "12px 16px 16px" }}>
               {/* All nav links */}
               {[
