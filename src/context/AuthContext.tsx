@@ -24,7 +24,7 @@ interface AuthContextType {
   user: User | null;
   isLoggedIn: boolean;
   login: (email: string, password: string, role: UserRole) => Promise<boolean | "wrong-role">;
-  signup: (data: SignupData) => Promise<boolean>;
+  signup: (data: SignupData) => Promise<string | true>;
   logout: () => void;
   updateProfile: (updates: Partial<Pick<User, "name" | "phone" | "address" | "avatar" | "kitchenName" | "speciality" | "bio" | "vehicleType" | "vehicleNumber">>) => void;
 }
