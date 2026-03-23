@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
+import { supabase } from "@/lib/supabase";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingBag, Menu, X, LogOut, User, ChefHat, Home, UtensilsCrossed, Search, ClipboardList, Info, Phone, Package, TrendingUp, CalendarCheck, PartyPopper, Heart, Settings, BookOpen, ShoppingBasket, Bike, IndianRupee, Navigation } from "lucide-react";
 
@@ -14,7 +15,18 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [profileDrop, setProfileDrop] = useState(false);
   const [openDrop, setOpenDrop] = useState<string | null>(null);
+  const [hasOrders, setHasOrders] = useState(false);
   const navRef = useRef<HTMLElement>(null);
+
+  // Check if user has any orders
+  useEffect(() => {
+    if (!isLoggedIn || !user) { setHasOrders(false); return; }
+    const checkOrders = async () => {
+      const { data } = await supabase?.from("orders").select("id").eq("customer_id", user.id).limit(1);
+      setHasOrders(!!data && data.length > 0);
+    };
+    checkOrders();
+  }, [isLoggedIn, user]);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -47,11 +59,13 @@ export default function Navbar() {
     : [
         { href: "/", label: "Home", icon: Home },
         { href: "/browse", label: "Browse Food", icon: Search },
-        ...(isLoggedIn ? [
+        ...(isLoggedIn && hasOrders ? [
           { href: "/orders", label: "My Orders", icon: ClipboardList, children: [
             { href: "/track", label: "Track Order", icon: Navigation },
-            { href: "/favorites", label: "Favorites", icon: Heart },
           ] },
+        ] : []),
+        ...(isLoggedIn ? [
+          { href: "/favorites", label: "Favorites", icon: Heart },
         ] : []),
         { href: "/recipes", label: "Recipes", icon: BookOpen, children: [
           { href: "/recipes", label: "Recipes", icon: BookOpen },
