@@ -327,14 +327,14 @@ export default function Navbar() {
             {/* Dark overlay */}
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
               onClick={() => setOpen(false)}
-              style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.5)", zIndex: 9997 }} />
+              style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.5)", zIndex: 99999 }} />
             {/* Side drawer */}
             <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }}
               transition={{ type: "tween", duration: 0.3 }}
               style={{
                 position: "fixed", top: 0, right: 0, bottom: 0, width: "75%", maxWidth: 320,
                 background: "linear-gradient(180deg, #0f3443, #163a4a, #1a4050)",
-                zIndex: 9998, overflowY: "auto", padding: "60px 0 80px",
+                zIndex: 100000, overflowY: "auto", padding: "60px 0 80px",
                 boxShadow: "-4px 0 30px rgba(0,0,0,0.3)",
               }}>
 
