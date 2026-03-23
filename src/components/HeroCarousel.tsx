@@ -8,7 +8,7 @@ import { Search, ChefHat, Star, Clock, Shield, IndianRupee, Flame, ChevronLeft, 
 const slides = [
   {
     image: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=1400&h=700&fit=crop",
-    videoId: "iFMmOFNz7Eg",
+    videoId: "1IszT_guI08",
     title: "Freshly Homemade Meals",
     highlight: "Cooked with Love",
     sub: "in Your Neighbourhood",
@@ -16,7 +16,7 @@ const slides = [
   },
   {
     image: "https://images.unsplash.com/photo-1567337710282-00832b415979?w=1400&h=700&fit=crop",
-    videoId: "5gkNPSdJOOY",
+    videoId: "mhDJNfV7hjk",
     title: "Experience the Taste of",
     highlight: "Real Home Food",
     sub: "Wherever You Are",
@@ -32,7 +32,7 @@ const slides = [
   },
   {
     image: "https://images.unsplash.com/photo-1630383249896-424e482df921?w=1400&h=700&fit=crop",
-    videoId: "GzhMsK87EB0",
+    videoId: "ZJy1ajvMU1k",
     title: "South Indian Specials",
     highlight: "From Amma's Kitchen",
     sub: "to Your Doorstep",
@@ -40,7 +40,7 @@ const slides = [
   },
   {
     image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=1400&h=700&fit=crop",
-    videoId: "K4pMSfjOaq0",
+    videoId: "vJapzH_46a8",
     title: "Royal Biryani &",
     highlight: "Mughlai Flavours",
     sub: "Made with Secret Recipes",
